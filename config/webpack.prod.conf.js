@@ -10,7 +10,6 @@ const HtmlWebpackPlugin = require('html-webpack-plugin')
 const UglifyJsPlugin = require("uglifyjs-webpack-plugin")
 const MiniCssExtractPlugin = require("mini-css-extract-plugin")
 const OptimizeCSSAssetsPlugin = require('optimize-css-assets-webpack-plugin')
-const theme = require('../theme.js')();
 
 const env = config.prodEnv;
 
@@ -37,7 +36,7 @@ const webpackConfig = merge(baseWebpackConfig, {
           'postcss-loader',
           {
             loader: 'less-loader',
-            options: {'modifyVars':theme,'javascriptEnabled': true}  // https://github.com/ant-design/ant-motion/issues/44
+            options: {'javascriptEnabled': true}  // https://github.com/ant-design/ant-motion/issues/44
           }
         ]
       }
@@ -119,25 +118,6 @@ const webpackConfig = merge(baseWebpackConfig, {
       chunks: ['manifest', 'vendor', 'index'],
       hash: false,
       // necessary to consistently work with multiple chunks via CommonsChunkPlugin
-      chunksSortMode: 'dependency'
-    }),
-    new HtmlWebpackPlugin({
-      filename: 'demo.html',
-      title: 'React antd Demo',
-      template: path.resolve(__dirname, '../src/index.html'),
-      chunks:['manifest', 'vendor', 'demo'],
-      inject: true,
-      minify: {
-        // 删除Html注释
-        removeComments: true,
-        // 去除空格
-        collapseWhitespace: true,
-        // 去除属性引号
-        removeAttributeQuotes: true
-        // more options:
-        // https://github.com/kangax/html-minifier#options-quick-reference
-      },
-      hash: false,
       chunksSortMode: 'dependency'
     }),
     // keep module.id stable when vendor modules does not change

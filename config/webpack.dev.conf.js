@@ -9,8 +9,6 @@ const HtmlWebpackPlugin = require('html-webpack-plugin')
 const FriendlyErrorsPlugin = require('friendly-errors-webpack-plugin')
 const portfinder = require('portfinder')
 
-const theme = require('../theme.js')();
-
 const HOST = process.env.HOST
 const PORT = process.env.PORT && Number(process.env.PORT)
 
@@ -34,7 +32,7 @@ const devWebpackConfig = merge(baseWebpackConfig, {
           'postcss-loader',
           {
             loader: 'less-loader',
-            options: {'modifyVars':theme,'javascriptEnabled': true} // https://github.com/ant-design/ant-motion/issues/44
+            options: {'javascriptEnabled': true} // https://github.com/ant-design/ant-motion/issues/44
           }
         ]
       }
@@ -80,13 +78,6 @@ const devWebpackConfig = merge(baseWebpackConfig, {
       title: 'React webpack Demo',
       template: path.resolve(__dirname, '../src/index.html'),
       chunks:['index'],
-      inject: true
-    }),
-    new HtmlWebpackPlugin({
-      filename: 'demo.html',
-      title: 'React antd Demo',
-      template: path.resolve(__dirname, '../src/index.html'),
-      chunks:['demo'],
       inject: true
     }),
     // 复制自定义静态资源

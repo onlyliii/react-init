@@ -1,0 +1,15 @@
+{
+  "presets": [
+    ["env", {
+      "modules": false,
+      "targets": {
+        "browsers": ["> 5%", "last 2 versions", "not ie <= 9"]
+      }
+    }],
+    "react",
+    "stage-0"
+  ],
+  "plugins": [
+    ["import", { "libraryName": "antd", "libraryDirectory": "es", "style": true }]
+  ]
+}
